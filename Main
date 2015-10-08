@@ -1,0 +1,292 @@
+#include <iostream>
+#include <cmath>
+#include <cstdlib>
+#include <iomanip>
+
+
+using namespace std;
+
+//--------------Variable Declaration------------------\\;
+int user_option;
+double bounds = .5;
+double movement;
+int leftright = 0;
+int starting_location;
+int final_location0 = 0;
+int final_location1 = 1;
+int final_location2 = 2;
+int final_location3 = 3;
+int final_location4 = 4;
+int final_location5 = 5;
+int final_location6 = 6;
+int final_location7 = 7;
+int final_location8 = 8;
+
+
+double prize_0 = 100;
+double prize_1 = 500;
+double prize_2 = 1000;
+double prize_3 = 0;
+double prize_4 = 10000;
+double prize_5 = prize_3;
+double prize_6 = prize_2;
+double prize_7 = prize_1;
+double prize_8 = prize_0;
+
+
+/* start of the functions. First function is the menu function.
+
+It contains the original cout statements and the ability to pick an option. Also has the invalid option if they enter something they aren't supposed too. */
+
+int menu()
+{
+	cout << "MENU" << endl;
+	cout << "Please select your option:" << endl;
+	cout << "1 - Drop a single chip into one slot." << endl;
+	cout << "2 - Drop multiple chips into one slot." << endl;
+	cout << "3 - Quit the program" << endl;
+	cout << "Please enter your selection now: ";
+	cin >> user_option;
+
+	while (user_option > 3 || user_option < 1)
+
+	{
+		cout << "Please enter a valid option" << endl;
+		cin >> user_option;
+	}
+
+
+	return (user_option);
+
+}
+
+double bowl_of_chips(double starting_location)
+{
+	{
+		double movement = starting_location;
+		int leftright = 0;
+
+		int number_chips = 0;
+		int user_chips = 0;
+
+		cout << "How many chips would you like to put in? ";
+
+		cin >> user_chips;
+
+		while (number_chips < user_chips)
+		{
+
+			for (int i = 0; i < 12; i++)
+			{
+				if (movement <= 0)
+				{
+					movement = movement + bounds;
+				}
+				else if (movement >= 8)
+				{
+					movement = movement - bounds;
+				}
+				else if (movement > 0 && movement < 8)
+				{
+					leftright = rand() % 2;
+
+					if (leftright = 1)
+					{
+						movement = movement + .5;
+						cout << movement << " ";
+					}
+
+					else if (leftright = 0)
+					{
+						movement = movement - .5;
+						cout << movement << " ";
+					}
+					else
+					{
+						cout << "THIS IS BROKEN IN THE MOVEMENT/RAND PHASE!";
+
+					}
+				}
+
+
+				double prize_money_final = 0;
+
+				if (movement = final_location0)
+				{
+					prize_money_final = prize_money_final + prize_0;
+				}
+				else if (movement = final_location1)
+				{
+					prize_money_final = prize_money_final + prize_1;
+				}
+				else if (movement = final_location2)
+				{
+					prize_money_final = prize_money_final + prize_2;
+				}
+				else if (movement = final_location3)
+				{
+					prize_money_final = prize_money_final + prize_3;
+				}
+				else if (movement = final_location4)
+				{
+					prize_money_final = prize_money_final + prize_4;
+				}
+				else if (movement = final_location5)
+				{
+					prize_money_final = prize_money_final + prize_5;
+				}
+				else if (movement = final_location6)
+				{
+					prize_money_final = prize_money_final + prize_6;
+				}
+				else if (movement = final_location7)
+				{
+					prize_money_final = prize_money_final + prize_7;
+				}
+				else if (movement = final_location8)
+				{
+					prize_money_final = prize_money_final + prize_8;
+				}
+				else
+				{
+					cout << "This is broken";
+				}
+			}
+			number_chips++;
+
+			
+		}
+
+	}
+
+	system("pause");
+	return(movement);
+}
+
+double Let_the_chips_fall(int starting_location, int leftright)
+{
+	movement = starting_location;
+
+	cout << "[";
+
+	//start of the movement down, defines rows and then the actually movement rules.
+	for (int i = 0; i < 12; i++)
+	{
+		if (movement <= 0)
+		{
+			movement = movement + bounds;
+		}
+		else if (movement >= 8)
+		{
+			movement = movement - bounds;
+		}
+		else if (movement > 0 && movement < 8)
+		{
+			leftright = rand() % 2;
+
+			if (leftright = 1)
+			{
+				movement = movement + .5;
+				cout << movement << " ";
+			}
+
+			else if (leftright = 0)
+			{
+				movement = movement - .5;
+				cout << movement << " ";
+			}
+			else
+			{
+				cout << "THIS IS BROKEN IN THE MOVEMENT/RAND PHASE!";
+
+			}
+		}
+	}
+
+
+	cout << "]" << endl;
+	if (movement = final_location0)
+	{
+		cout << setprecision(2) << "Winnings: $" << prize_0 << endl;
+	}
+	else if (movement = final_location1)
+	{
+		cout << setprecision(2) << "Winnings: $" << prize_1 << endl;
+	}
+	else if (movement = final_location2)
+	{
+		cout << setprecision(2) << "Winnings: $" << prize_2 << endl;
+	}
+	else if (movement = final_location3)
+	{
+		cout << setprecision(2) << "Winnings: $" << prize_3 << endl;
+	}
+	else if (movement = final_location4)
+	{
+		cout << setprecision(2) << "Winnings: $" << prize_4 << endl;
+	}
+	else if (movement = final_location5)
+	{
+		cout << setprecision(2) << "Winnings: $" << prize_5 << endl;
+	}
+	else if (movement = final_location6)
+	{
+		cout << setprecision(2) << "Winnings: $" << prize_6 << endl;
+	}
+	else if (movement = final_location7)
+	{
+		cout << setprecision(2) << "Winnings: $" << prize_7 << endl;
+	}
+	else if (movement = final_location8)
+	{
+		cout << setprecision(2) << "Winnings: $" << prize_8 << endl;
+	}
+	system("pause");
+
+	return(movement);
+}
+
+int main()
+{
+	srand(time(0));
+	menu();
+	if (user_option == 1)
+	{
+		cout << "SINGLE" << endl;
+		cout << "Where do you want to place the chip? (0-8): ";
+		cin >> starting_location;
+		while (starting_location > 8 || starting_location < 0)
+		{
+			cout << "Invalid";
+			system("cls");
+			menu();
+		}
+
+		Let_the_chips_fall(starting_location, leftright);
+
+	}
+
+	else if (user_option == 2)
+
+	{
+		cout << "MULTIPLE" << endl;
+		cout << "Where do you want to drop the chips? ";
+		cin >> starting_location;
+		bowl_of_chips(starting_location);
+		while (starting_location > 8 || starting_location < 0)
+		{
+			cout << "Invalid";
+			system("cls");
+			menu();
+		}
+	}
+
+	else
+
+	{
+		cout << "GOODBYE";
+	}
+
+	system("pause");
+	return(0);
+}

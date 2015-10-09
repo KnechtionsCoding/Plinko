@@ -3,11 +3,23 @@
 #include <cstdlib>
 #include <iomanip>
 
+/* 
+
+Test case 1: Drop 1 chip into slot 1, finishes in slot 3. Prize money equal 0. 
+
+Test Case 2: Drop 1000 chips into slot 3, 500 end up in slot 4, 300 in slot 2 and 200 in slot. total winnings: (500 * 10000) + (300*1000)=5,300,000 average winnings 5,300.
+
+Test Case 3: drop 1 into slot 5 finishes in slot 5 no money is won.
+
+Question two, how to make it so that my menu function resets all the user inputs? How to return to the menu function so that all the inputs get cleared.
+
+*/
 
 using namespace std;
 
 //--------------Variable Declaration------------------\\;
-int user_option;
+
+int user_chips;
 double bounds = .5;
 double movement;
 int leftright = 0;
@@ -38,54 +50,25 @@ double per_chip;
 
 /* start of the functions. First function is the menu function.
 
-It contains the original cout statements and the ability to pick an option. Also has the invalid option if they enter something they aren't supposed too. */
+It contains the original cout statements and the ability to pick an option. Also has the invalid option if they enter something they aren't supposed too.
 
-int menu()
-{
-	cout << "MENU" << endl;
-	cout << "Please select your option:" << endl;
-	cout << "1 - Drop a single chip into one slot." << endl;
-	cout << "2 - Drop multiple chips into one slot." << endl;
-	cout << "3 - Quit the program" << endl;
-	cout << "Please enter your selection now: ";
-	cin >> user_option;
+*/
 
-	while (user_option > 3 || user_option < 1)
+ 
 
-	{
-		cout << "INVALID SELECTION. Please select 1, 2, or 3." << endl;
-		cin >> user_option;
-	}
-
-
-	return (user_option);
-
-}
-
-double bowl_of_chips(double starting_location)
+double bowl_of_chips(double starting_location, int user_chips)
 {
 	{
+		prize_money_final = 0;
 		movement = starting_location;
 
-		int number_chips = 0;
-		int user_chips;
-
-		cout << "How many chips would you like to put in? ";
-
-		cin >> user_chips;
-
-		while (user_chips <= 0)
+		for (int number_chips = 0; number_chips < user_chips; number_chips++)
 		{
-			cout << "INVALID OF CHIPS. RETURNING TO MENU.";
-			system("pause");
-			menu();
-		}
+			movement = starting_location;
 
-		while (number_chips < user_chips)
-		{
-
-			for (int i = 0; i < 12; i++)
+			for (int i = 0; i < 12; i++) 
 			{
+
 				if (movement <= 0)
 				{
 					movement = movement + bounds;
@@ -100,12 +83,12 @@ double bowl_of_chips(double starting_location)
 
 					if (leftright == 1)
 					{
-						movement = movement + .5;
+						movement = movement + bounds;
 					}
 
 					else if (leftright == 0)
 					{
-						movement = movement - .5;
+						movement = movement - bounds;
 					}
 					else
 					{
@@ -113,6 +96,8 @@ double bowl_of_chips(double starting_location)
 
 					}
 				}
+
+			}
 
 				if (movement == final_location0)
 				{
@@ -153,11 +138,8 @@ double bowl_of_chips(double starting_location)
 				else
 				{
 					cout << "THis is broken at the end of the result in Bowl of chips!" << endl;
-					break;
+					
 				}
-				
-			}
-			number_chips++;
 
 
 		}
@@ -167,7 +149,7 @@ double bowl_of_chips(double starting_location)
 	}
 	cout << fixed << showpoint << setprecision(2);
 	cout << "Total Winnings: $" << prize_money_final << endl;
-	cout << "Average Per Chip Winnings: $" << per_chip << endl;	
+	cout << "Average Per Chip Winnings: $" << per_chip << endl;
 
 	system("pause");
 	return(movement);
@@ -175,8 +157,9 @@ double bowl_of_chips(double starting_location)
 
 double Let_the_chips_fall(int starting_location, int leftright)
 {
+	
 	movement = starting_location;
-
+	
 	cout << "[";
 
 	//start of the movement down, defines rows and then the actually movement rules.
@@ -257,51 +240,100 @@ double Let_the_chips_fall(int starting_location, int leftright)
 
 }
 
+int get_menu()
+{
+	int user_option = 0;
+	cout << "MENU" << endl;
+	cout << "Please select your option:" << endl;
+	cout << "1 - Drop a single chip into one slot." << endl;
+	cout << "2 - Drop multiple chips into one slot." << endl;
+	cout << "3 - Quit the program" << endl;
+	cout << "Please enter your selection now: ";
+	cin >> user_option;
+
+	while (user_option > 3 || user_option < 1)
+
+	{
+		cout << "INVALID SELECTION. Please select 1, 2, or 3." << endl;
+		system("cls");
+		user_option = get_menu();
+	}
+
+	while (user_option == 1 || user_option == 2)
+	{
+		if (user_option == 1)
+		{
+			cout << "*** DROPPING A SINGLE CHIP ***" << endl;
+			cout << "Where do you want to place the chip? (0-8): ";
+			cin >> starting_location;
+
+			while (starting_location > 8 || starting_location < 0)
+			{
+				cout << "INVALID SLOT" << endl;
+				system("pause");
+				system("cls");
+				cin.clear(1000, '\n');
+				user_option = get_menu();
+			}
+
+			Let_the_chips_fall(starting_location, leftright);
+			system("cls");
+			user_option = get_menu();
+		}
+
+
+		if (user_option == 2)
+
+		{
+			cout << "MULTIPLE" << endl;
+			cout << "Where do you want to drop the chips? ";
+			cin >> starting_location;
+
+			/* Question two ?*/
+
+			while (starting_location > 8 || starting_location < 0)
+			{
+				cout << "INVALID SLOT" << endl;
+				system("pause");
+				system("cls");
+				cin.clear(1000, '\n');
+				user_option = get_menu();
+
+			}
+
+			cout << "How many chips would you like to put in? ";
+
+			cin >> user_chips;
+
+			while (user_chips <= 0)
+			{
+				cout << "INVALID OF CHIPS. RETURNING TO MENU.";
+				system("pause");
+				system("cls");
+				user_option = get_menu();
+			}
+
+			bowl_of_chips(starting_location, user_chips);
+			system("cls");
+			user_option = get_menu();
+		}
+	}
+
+	if (user_option == 3)
+	{
+		cout << "GOODBYE" << endl;
+	}
+	return(user_option);
+
+}
+
 int main()
 {
 	srand(time(0));
-	menu();
-	if (user_option == 1)
-	{
-		cout << "*** DROPPING A SINGLE CHIP ***" << endl;
-		cout << "Where do you want to place the chip? (0-8): ";
-		cin >> starting_location;
-		while (starting_location > 8 || starting_location < 0)
-		{
-			cout << "INVALID SLOT" << endl;
-			starting_location = 0;
-			system("pause");
-			system("cls");
-			menu();
-		}
+	get_menu();
 
-		Let_the_chips_fall(starting_location, leftright);
-
-	}
-
-	else if (user_option == 2)
-
-	{
-		cout << "MULTIPLE" << endl;
-		cout << "Where do you want to drop the chips? ";
-		cin >> starting_location;
 		
-		while (starting_location > 8 || starting_location < 0)
-		{
-			cout << "INVALID SLOT" << endl;
-			starting_location = 0;
-			system("pause");
-			system("cls");
-			menu();
-		}
-
-		bowl_of_chips(starting_location);
-	}
-
-	else
-
-	{
-		cout << "GOODBYE";
-	}
 	return(0);
+
 }
+

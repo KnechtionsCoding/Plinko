@@ -28,10 +28,12 @@ double prize_1 = 500;
 double prize_2 = 1000;
 double prize_3 = 0;
 double prize_4 = 10000;
-double prize_5 = prize_3;
-double prize_6 = prize_2;
-double prize_7 = prize_1;
-double prize_8 = prize_0;
+double prize_5 = 0;
+double prize_6 = 1000;
+double prize_7 = 500;
+double prize_8 = 100;
+double prize_money_final = 0;
+double per_chip;
 
 
 /* start of the functions. First function is the menu function.
@@ -51,7 +53,7 @@ int menu()
 	while (user_option > 3 || user_option < 1)
 
 	{
-		cout << "Please enter a valid option" << endl;
+		cout << "INVALID SELECTION. Please select 1, 2, or 3." << endl;
 		cin >> user_option;
 	}
 
@@ -67,11 +69,18 @@ double bowl_of_chips(double starting_location)
 		int leftright = 0;
 
 		int number_chips = 0;
-		int user_chips = 0;
+		int user_chips;
 
 		cout << "How many chips would you like to put in? ";
 
 		cin >> user_chips;
+
+		while (user_chips <= 0)
+		{
+			cout << "INVALID OF CHIPS. RETURNING TO MENU.";
+			system("pause");
+			menu();
+		}
 
 		while (number_chips < user_chips)
 		{
@@ -93,13 +102,11 @@ double bowl_of_chips(double starting_location)
 					if (leftright = 1)
 					{
 						movement = movement + .5;
-						cout << movement << " ";
 					}
 
 					else if (leftright = 0)
 					{
 						movement = movement - .5;
-						cout << movement << " ";
 					}
 					else
 					{
@@ -107,9 +114,6 @@ double bowl_of_chips(double starting_location)
 
 					}
 				}
-
-
-				double prize_money_final = 0;
 
 				if (movement = final_location0)
 				{
@@ -154,10 +158,15 @@ double bowl_of_chips(double starting_location)
 			}
 			number_chips++;
 
-			
+
 		}
 
+		per_chip = prize_money_final / user_chips;
+
 	}
+	cout << fixed << showpoint << setprecision(2);
+	cout << "Total Winnings: $" << prize_money_final << endl;
+	cout << "Average Per Chip Winnings: $" << per_chip << endl;	
 
 	system("pause");
 	return(movement);
@@ -184,13 +193,13 @@ double Let_the_chips_fall(int starting_location, int leftright)
 		{
 			leftright = rand() % 2;
 
-			if (leftright = 1)
+			if (leftright == 1)
 			{
 				movement = movement + .5;
 				cout << movement << " ";
 			}
 
-			else if (leftright = 0)
+			else if (leftright == 0)
 			{
 				movement = movement - .5;
 				cout << movement << " ";
@@ -207,43 +216,44 @@ double Let_the_chips_fall(int starting_location, int leftright)
 	cout << "]" << endl;
 	if (movement = final_location0)
 	{
-		cout << setprecision(2) << "Winnings: $" << prize_0 << endl;
+		cout << fixed << showpoint << setprecision(2) << "Winnings: $" << prize_0 << endl;
 	}
 	else if (movement = final_location1)
 	{
-		cout << setprecision(2) << "Winnings: $" << prize_1 << endl;
+		cout << fixed << showpoint << setprecision(2) << "Winnings: $" << prize_1 << endl;
 	}
 	else if (movement = final_location2)
 	{
-		cout << setprecision(2) << "Winnings: $" << prize_2 << endl;
+		cout << fixed << showpoint << setprecision(2) << "Winnings: $" << prize_2 << endl;
 	}
 	else if (movement = final_location3)
 	{
-		cout << setprecision(2) << "Winnings: $" << prize_3 << endl;
+		cout << fixed << showpoint << setprecision(2) << "Winnings: $" << prize_3 << endl;
 	}
 	else if (movement = final_location4)
 	{
-		cout << setprecision(2) << "Winnings: $" << prize_4 << endl;
+		cout << fixed << showpoint << setprecision(2) << "Winnings: $" << prize_4 << endl;
 	}
 	else if (movement = final_location5)
 	{
-		cout << setprecision(2) << "Winnings: $" << prize_5 << endl;
+		cout << fixed << showpoint << setprecision(2) << "Winnings: $" << prize_5 << endl;
 	}
 	else if (movement = final_location6)
 	{
-		cout << setprecision(2) << "Winnings: $" << prize_6 << endl;
+		cout << fixed << showpoint << setprecision(2) << "Winnings: $" << prize_6 << endl;
 	}
 	else if (movement = final_location7)
 	{
-		cout << setprecision(2) << "Winnings: $" << prize_7 << endl;
+		cout << fixed << showpoint << setprecision(2) << "Winnings: $" << prize_7 << endl;
 	}
 	else if (movement = final_location8)
 	{
-		cout << setprecision(2) << "Winnings: $" << prize_8 << endl;
+		cout << fixed << showpoint << setprecision(2) << "Winnings: $" << prize_8 << endl;
 	}
-	system("pause");
 
+	system("pause");
 	return(movement);
+
 }
 
 int main()
@@ -252,12 +262,13 @@ int main()
 	menu();
 	if (user_option == 1)
 	{
-		cout << "SINGLE" << endl;
+		cout << "*** DROPPING A SINGLE CHIP ***" << endl;
 		cout << "Where do you want to place the chip? (0-8): ";
 		cin >> starting_location;
 		while (starting_location > 8 || starting_location < 0)
 		{
-			cout << "Invalid";
+			cout << "INVALID SLOT";
+			system("pause");
 			system("cls");
 			menu();
 		}
@@ -273,9 +284,11 @@ int main()
 		cout << "Where do you want to drop the chips? ";
 		cin >> starting_location;
 		bowl_of_chips(starting_location);
+		
 		while (starting_location > 8 || starting_location < 0)
 		{
-			cout << "Invalid";
+			cout << "INVALID SLOT";
+			system("pause");
 			system("cls");
 			menu();
 		}
@@ -286,7 +299,5 @@ int main()
 	{
 		cout << "GOODBYE";
 	}
-
-	system("pause");
 	return(0);
 }

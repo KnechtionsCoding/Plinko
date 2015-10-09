@@ -150,6 +150,11 @@ double bowl_of_chips(double starting_location)
 				{
 					prize_money_final = prize_money_final + prize_8;
 				}
+				else
+				{
+					cout << "THis is broken at the end of the result in Bowl of chips!" << endl;
+					break;
+				}
 				
 			}
 			number_chips++;
@@ -264,6 +269,7 @@ int main()
 		while (starting_location > 8 || starting_location < 0)
 		{
 			cout << "INVALID SLOT" << endl;
+			starting_location = 0;
 			system("pause");
 			system("cls");
 			menu();
@@ -283,6 +289,7 @@ int main()
 		while (starting_location > 8 || starting_location < 0)
 		{
 			cout << "INVALID SLOT" << endl;
+			starting_location = 0;
 			system("pause");
 			system("cls");
 			menu();

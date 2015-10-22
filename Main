@@ -156,109 +156,136 @@ double bowl_of_chips(double starting_location, int user_chips)
 	return(movement);
 }
 
-double all_the_slots( int user_chips)
+double all_the_slots(int user_chips)
 {
 	double prize_money_final;
 	double movement;
-	double prize_money_final0;
-	double prize_money_final1;
-	double prize_money_final2;
-	double prize_money_final3;
-	double prize_money_final4;
-	double prize_money_final5;
-	double prize_money_final6;
-	double prize_money_final7;
-	double prize_money_final8;
+	double prize_money_final0 = 0;
+	double prize_money_final1 = 0;
+	double prize_money_final2 = 0;
+	double prize_money_final3 = 0;
+	double prize_money_final4 = 0;
+	double prize_money_final5 = 0;
+	double prize_money_final6 = 0;
+	double prize_money_final7 = 0;
+	double prize_money_final8 = 0;
 
 
-	
-	for (int starting_location = 0; starting_location < NUMBER_SLOTS; starting_location++)
+
+	for (int starting_location = 0; starting_location <= NUMBER_SLOTS; starting_location++)
+	{
+		int counter_zero = 0;
+		int counter_one = 0;
+		int counter_two = 0;
+		int counter_three = 0;
+		int counter_four = 0;
+		int counter_five = 0;
+		int counter_six = 0;
+		int counter_seven = 0;
+		int counter_eight = 0;
+
+		prize_money_final = 0;
+
+		for (int number_chips = 0; number_chips < user_chips; number_chips++)
 		{
-			prize_money_final = 0;
 			movement = starting_location;
 
-			for (int number_chips = 0; number_chips < user_chips; number_chips++)
+			for (int i = 0; i < 12; i++)
 			{
-				movement = starting_location;
 
-				for (int i = 0; i < 12; i++)
+				if (movement <= 0)
 				{
+					movement = movement + BOUNDS;
+				}
+				else if (movement >= 8)
+				{
+					movement = movement - BOUNDS;
+				}
+				else if (movement > 0 && movement < 8)
+				{
+					LEFTRIGHT = rand() % 2;
 
-					if (movement <= 0)
+					if (LEFTRIGHT == 1)
 					{
 						movement = movement + BOUNDS;
 					}
-					else if (movement >= 8)
+
+					else if (LEFTRIGHT == 0)
 					{
 						movement = movement - BOUNDS;
 					}
-					else if (movement > 0 && movement < 8)
+					else
 					{
-						LEFTRIGHT = rand() % 2;
+						cout << "THIS IS BROKEN IN THE MOVEMENT/RAND PHASE!";
 
-						if (LEFTRIGHT == 1)
-						{
-							movement = movement + BOUNDS;
-						}
-
-						else if (LEFTRIGHT == 0)
-						{
-							movement = movement - BOUNDS;
-						}
-						else
-						{
-							cout << "THIS IS BROKEN IN THE MOVEMENT/RAND PHASE!";
-
-						}
 					}
-
 				}
-
-				if (movement == FINAL_LOCATION_0)
-				{
-					prize_money_final0 = prize_money_final + PRIZE_0;
-				}
-				else if (movement == FINAL_LOCATION_1)
-				{
-					prize_money_final1 = prize_money_final + PRIZE_1;
-				}
-				else if (movement == FINAL_LOCATION_2)
-				{
-					prize_money_final2 = prize_money_final + PRIZE_2;
-				}
-				else if (movement == FINAL_LOCATION_3)
-				{
-					prize_money_final3 = prize_money_final + PRIZE_3;
-				}
-				else if (movement == FINAL_LOCATION_4)
-				{
-					prize_money_final4 = prize_money_final + PRIZE_4;
-				}
-				else if (movement == FINAL_LOCATION_5)
-				{
-					prize_money_final5 = prize_money_final + PRIZE_5;
-				}
-				else if (movement == FINAL_LOCATION_6)
-				{
-					prize_money_final6 = prize_money_final + PRIZE_6;
-				}
-				else if (movement == FINAL_LOCATION_7)
-				{
-					prize_money_final7 = prize_money_final + PRIZE_7;
-				}
-				else if (movement == FINAL_LOCATION_8)
-				{
-					prize_money_final8 = prize_money_final + PRIZE_8;
-				}
-				else
-				{
-					cout << "THis is broken at the end of the result in Bowl of chips!" << endl;
-
-				}
-
 
 			}
+
+			if (movement == FINAL_LOCATION_0)
+			{
+				counter_zero++;
+			}
+			else if (movement == FINAL_LOCATION_1)
+			{
+				counter_one++;
+			}
+			else if (movement == FINAL_LOCATION_2)
+			{
+				counter_two++;
+			}
+			else if (movement == FINAL_LOCATION_3)
+			{
+
+				counter_three++;
+			}
+			else if (movement == FINAL_LOCATION_4)
+			{
+
+				counter_four++;
+			}
+			else if (movement == FINAL_LOCATION_5)
+			{
+
+				counter_five++;
+			}
+			else if (movement == FINAL_LOCATION_6)
+			{
+				counter_six++;
+			}
+			else if (movement == FINAL_LOCATION_7)
+			{
+
+				counter_seven++;
+			}
+			else if (movement == FINAL_LOCATION_8)
+			{
+
+				counter_eight++;
+			}
+			else
+			{
+				cout << "This is broken at the end of the result in Bowl of chips!" << endl;
+
+			}
+
+
 		}
+
+		prize_money_final0 = counter_zero * PRIZE_0;
+		prize_money_final1 = counter_one * PRIZE_1;
+		prize_money_final2 = counter_two * PRIZE_2;
+		prize_money_final3 = counter_three * PRIZE_3;
+		prize_money_final4 = counter_four * PRIZE_4;
+		prize_money_final5 = counter_five * PRIZE_5;
+		prize_money_final6 = counter_six * PRIZE_6;
+		prize_money_final7 = counter_seven * PRIZE_7;
+		prize_money_final8 = counter_eight * PRIZE_8;
+
+
+		cout << counter_one << "  " << counter_two << "  " << counter_three << "  " << counter_four << "  " << counter_five << "  " << counter_six << "  " << counter_seven << "  " << counter_eight << "  " <<  endl;
+	}
 
 	cout << prize_money_final0 << " " << prize_money_final1 << " " << prize_money_final2 << " " << prize_money_final3 << prize_money_final4 << " " << prize_money_final5 << " " << prize_money_final6 << " " << prize_money_final7 << " " << prize_money_final8;
 
@@ -319,7 +346,7 @@ double Let_the_chips_fall(int starting_location, int leftright)
 				cout << "THIS IS BROKEN IN THE MOVEMENT/RAND PHASE!";
 
 			}
-			
+
 		}
 	}
 
